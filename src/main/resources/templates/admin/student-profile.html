@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile - Bright Future School</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #E65100;
+            --primary-dark: #BF360C;
+            --primary-light: #FFF3E0;
+            --warning: #F57C00;
+            --success: #2E7D32;
+            --danger: #C62828;
+            --info: #0277BD;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f5f5;
+        }
+
+        .profile-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #BF360C, #E65100);
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(230, 81, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .profile-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 200px;
+            height: 200px;
+            background: rgba(245, 124, 0, 0.2);
+            border-radius: 50%;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #F57C00;
+            object-fit: cover;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-header h3 {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-header p {
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            border-top: 3px solid transparent;
+        }
+
+        .info-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top-color: #E65100;
+        }
+
+        .info-card h6 {
+            color: #BF360C;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #FFE0B2;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-card h6 i {
+            color: #F57C00;
+            font-size: 1.2rem;
+        }
+
+        .info-item {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: #FFF3E0;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #757575;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #212121;
+            font-size: 1.05rem;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .badge-active {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .badge-inactive {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .badge-graduated {
+            background: #E3F2FD;
+            color: #0277BD;
+        }
+
+        .badge-transferred {
+            background: #FFEBEE;
+            color: #C62828;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #F57C00, #E65100);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230, 81, 0, 0.4);
+            color: white;
+        }
+
+        .btn-print {
+            background: white;
+            color: #E65100;
+            border: 2px solid #E65100;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-print:hover {
+            background: #E65100;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230, 81, 0, 0.3);
+        }
+
+        .btn-back {
+            background: #f5f5f5;
+            color: #424242;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-back:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+            color: #212121;
+        }
+
+        .breadcrumb-item a {
+            color: #E65100;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb-item a:hover {
+            color: #BF360C;
+            text-decoration: underline;
+        }
+
+        .breadcrumb-item.active {
+            color: #757575;
+        }
+
+        /* Student ID Badge */
+        .student-id-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .admission-badge {
+            background: rgba(245, 124, 0, 0.3);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white;
+            }
+            .profile-header {
+                background: #E65100 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .info-card {
+                box-shadow: none;
+                border: 1px solid #e0e0e0;
+                break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                padding: 1.5rem;
+            }
+
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="profile-container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4 no-print">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/admin/students">Students</a></li>
+            <li class="breadcrumb-item active">Student Profile</li>
+        </ol>
+    </nav>
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="row align-items-center">
+            <div class="col-md-2 text-center mb-3 mb-md-0">
+                <img th:src="${student.photo} ? @{'/uploads/' + ${student.photo}} : @{/images/default-avatar.png}"
+                     class="profile-photo"
+                     alt="Student Photo">
+            </div>
+            <div class="col-md-7">
+                <h3 class="mb-1" th:text="${student.fullName}">Student Name</h3>
+                <p class="mb-2 opacity-90">
+                    <i class="bi bi-mortarboard-fill"></i>
+                    <span th:text="${student.className}">Class</span> Student
+                </p>
+                <div class="d-flex gap-2 flex-wrap">
+                        <span class="student-id-badge">
+                            <i class="bi bi-hash"></i> <span th:text="${student.studentId}">BFP001</span>
+                        </span>
+                    <span class="admission-badge">
+                            <i class="bi bi-journal-text"></i> <span th:text="${student.admissionNumber}">ADM-2024-001</span>
+                        </span>
+                </div>
+            </div>
+            <div class="col-md-3 text-md-end mt-3 mt-md-0 no-print">
+                <button class="btn-print me-2 mb-2" onclick="window.print()">
+                    <i class="bi bi-printer"></i> Print Profile
+                </button>
+                <a th:href="@{/admin/students/edit/{id}(id=${student.id})}" class="btn-edit mb-2">
+                    <i class="bi bi-pencil-square"></i> Edit
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-lg-6">
+            <!-- Personal Information -->
+            <div class="info-card">
+                <h6>
+                    <i class="bi bi-person-badge-fill"></i> Personal Information
+                </h6>
+                <div class="row">
+                    <div class="col-6 info-item">
+                        <div class="info-label">Surname</div>
+                        <div class="info-value" th:text="${student.surname}">Doe</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">First Name</div>
+                        <div class="info-value" th:text="${student.firstName}">John</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Middle Name</div>
+                        <div class="info-value" th:text="${student.middleName ?: 'N/A'}">N/A</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Gender</div>
+                        <div class="info-value">
+                            <i class="bi" th:class="${student.gender == 'Male'} ? 'bi-gender-male text-info' : 'bi-gender-female text-danger'"></i>
+                            <span th:text="${student.gender}">Male</span>
+                        </div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Date of Birth</div>
+                        <div class="info-value" th:text="${#temporals.format(student.dateOfBirth, 'dd MMMM yyyy')}">01 Jan 2015</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Age</div>
+                        <div class="info-value" th:text="${student.age} + ' years'">9 years</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Religion</div>
+                        <div class="info-value" th:text="${student.religion ?: 'N/A'}">Christianity</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Nationality</div>
+                        <div class="info-value" th:text="${student.nationality ?: 'N/A'}">Nigerian</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">State of Origin</div>
+                        <div class="info-value" th:text="${student.state ?: 'N/A'}">Lagos</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medical Information -->
+            <div class="info-card">
+                <h6>
+                    <i class="bi bi-heart-pulse-fill"></i> Medical Information
+                </h6>
+                <div class="row">
+                    <div class="col-6 info-item">
+                        <div class="info-label">Blood Group</div>
+                        <div class="info-value">
+                            <span class="badge bg-danger" th:text="${student.bloodGroup ?: 'Not Specified'}">O+</span>
+                        </div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Medical Condition</div>
+                        <div class="info-value" th:text="${student.medicalCondition ?: 'None'}">None</div>
+                    </div>
+                    <div class="col-12 info-item">
+                        <div class="info-label">Emergency Contact</div>
+                        <div class="info-value">
+                            <i class="bi bi-telephone-fill text-danger"></i>
+                            <span th:text="${student.emergencyContact}">+2348000000000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-lg-6">
+            <!-- Parent/Guardian Information -->
+            <div class="info-card">
+                <h6>
+                    <i class="bi bi-people-fill"></i> Parent/Guardian Information
+                </h6>
+                <div class="row">
+                    <div class="col-12 info-item">
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value" th:text="${student.parentName}">Mr. John Doe</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Phone Number</div>
+                        <div class="info-value">
+                            <i class="bi bi-whatsapp text-success"></i>
+                            <span th:text="${student.parentPhone}">+2348000000000</span>
+                        </div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Email Address</div>
+                        <div class="info-value" th:text="${student.parentEmail ?: 'N/A'}">parent@email.com</div>
+                    </div>
+                    <div class="col-12 info-item">
+                        <div class="info-label">Residential Address</div>
+                        <div class="info-value">
+                            <i class="bi bi-geo-alt-fill text-warning"></i>
+                            <span th:text="${student.address}">123 Main Street, Lagos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admission Details -->
+            <div class="info-card">
+                <h6>
+                    <i class="bi bi-journal-text"></i> Admission Details
+                </h6>
+                <div class="row">
+                    <div class="col-6 info-item">
+                        <div class="info-label">Student ID</div>
+                        <div class="info-value">
+                            <span class="badge" style="background: #E65100; color: white;" th:text="${student.studentId}">BFP001</span>
+                        </div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Admission Number</div>
+                        <div class="info-value" th:text="${student.admissionNumber}">ADM-2024-001</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Class</div>
+                        <div class="info-value" th:text="${student.className}">Primary 3</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Date Admitted</div>
+                        <div class="info-value" th:text="${#temporals.format(student.dateAdmitted, 'dd MMMM yyyy')}">15 Jan 2024</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Status</div>
+                        <div class="info-value">
+                                <span class="badge status-badge"
+                                      th:classappend="${student.status == 'Active'} ? 'badge-active' : (${student.status == 'Inactive'} ? 'badge-inactive' : (${student.status == 'Graduated'} ? 'badge-graduated' : 'badge-transferred'))"
+                                      th:text="${student.status}">Active</span>
+                        </div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Date Registered</div>
+                        <div class="info-value" th:text="${#temporals.format(student.createdAt, 'dd MMMM yyyy')}">15 Jan 2024</div>
+                    </div>
+                    <div class="col-6 info-item">
+                        <div class="info-label">Last Updated</div>
+                        <div class="info-value" th:text="${#temporals.format(student.updatedAt, 'dd MMMM yyyy, hh:mm a')}">20 Jan 2024, 10:30 AM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4 no-print">
+        <a href="/admin/students" class="btn-back">
+            <i class="bi bi-arrow-left"></i> Back to Student List
+        </a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Auto-hide alerts after 5 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+        const alerts = document.querySelectorAll('.alert-dismissible');
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }, 5000);
+        });
+    });
+
+    // Print optimization
+    window.addEventListener('beforeprint', function() {
+        // Any pre-print adjustments
+    });
+</script>
+</body>
+</html>

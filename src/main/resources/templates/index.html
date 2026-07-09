@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright Future Primary School - Home</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #E65100;
+            --primary-dark: #BF360C;
+            --primary-light: #FFF3E0;
+            --primary-accent: #FF6F00;
+            --secondary: #FF8F00;
+            --success: #2E7D32;
+            --info: #0277BD;
+            --warning: #F57C00;
+            --danger: #C62828;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #eeeeee;
+            --gray-600: #757575;
+            --gray-800: #424242;
+            --dark: #212121;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+       /* ============ NAVBAR - DEEP ORANGE ============ */
+        .navbar {
+            background: linear-gradient(135deg, #BF360C, #E65100) !important;
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #F57C00 !important;
+            letter-spacing: -1px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            text-decoration: none;
+        }
+
+        .navbar-brand i {
+            color: white;
+            margin-right: 8px;
+        }
+
+        .navbar-brand:hover {
+            color: #FF9800 !important;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.25) !important;
+            font-weight: 600;
+        }
+
+        .login-btn {
+            background: #F57C00 !important;
+            color: white !important;
+            border-radius: 50px;
+            padding: 0.6rem 2rem !important;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 124, 0, 0.4);
+            text-decoration: none;
+        }
+
+        .login-btn:hover {
+            background: #EF6C00 !important;
+            color: white !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 124, 0, 0.6);
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+
+        /* ============ HERO SECTION ============ */
+        .hero-section {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 50%, #FFCC80 100%);
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(230, 81, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(245, 124, 0, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero-title span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: var(--warning);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: #5D4037;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            max-width: 90%;
+        }
+
+        .btn-hero-primary {
+            background: linear-gradient(135deg, var(--warning), #EF6C00);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(245, 124, 0, 0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(245, 124, 0, 0.6);
+            color: var(--white);
+        }
+
+        .btn-hero-secondary {
+            background: var(--white);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-left: 1rem;
+        }
+
+        .btn-hero-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(230, 81, 0, 0.4);
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image {
+            border-radius: 30px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+            animation: float 6s ease-in-out infinite;
+            border: 8px solid var(--white);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(0.5deg); }
+            75% { transform: translateY(-5px) rotate(-0.5deg); }
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .hero-stat-item {
+            text-align: center;
+            background: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .hero-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-top: -5px;
+        }
+
+        /* ============ FEATURES SECTION ============ */
+        .features-section {
+            padding: 5rem 0;
+            background: var(--white);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 2px solid #e0e0e0;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--warning));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            border-color: transparent;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .icon-learning {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            color: var(--primary);
+        }
+
+        .icon-teachers {
+            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+            color: var(--warning);
+        }
+
+        .icon-safe {
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            color: var(--success);
+        }
+
+        .feature-card h3 {
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--gray-600);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ============ ABOUT SECTION ============ */
+        .about-section {
+            padding: 5rem 0;
+            background: var(--gray-50);
+        }
+
+        .about-image {
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 5px solid var(--white);
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gray-800);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-features li {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            color: var(--gray-600);
+        }
+
+        .about-features li i {
+            color: var(--success);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* ============ ACTIVITIES SECTION ============ */
+        .activities-section {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .activity-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .activity-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .activity-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .activity-card .card-body {
+            padding: 1.5rem;
+        }
+
+        /* ============ STATISTICS SECTION ============ */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 5rem 0;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--warning);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            color: var(--white);
+        }
+
+        /* ============ TESTIMONIALS ============ */
+        .testimonials-section {
+            padding: 5rem 0;
+            background: var(--primary-light);
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: -30px;
+            left: 20px;
+            font-size: 6rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: serif;
+        }
+
+        /* ============ CTA SECTION ============ */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--warning));
+            padding: 4rem 0;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .btn-cta {
+            background: var(--white);
+            color: var(--primary);
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: var(--primary-dark);
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: #1a1a1a;
+            color: var(--white);
+            padding: 4rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--warning);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #bdbdbd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--warning);
+            padding-left: 5px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: var(--warning);
+            color: #1a1a1a;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            text-align: center;
+            color: #757575;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-section {
+                min-height: auto;
+                padding: 3rem 0;
+            }
+
+            .btn-hero-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- ============ NAVIGATION BAR ============ -->
+<nav class="navbar navbar-expand-lg sticky-top" id="navbar">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="bi bi-sun-fill"></i> Bright Future
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">
+                        <i class="bi bi-house-door"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">
+                        <i class="bi bi-info-circle"></i> About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admissions">
+                        <i class="bi bi-pencil-square"></i> Admissions
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/gallery">
+                        <i class="bi bi-images"></i> Gallery
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">
+                        <i class="bi bi-envelope"></i> Contact
+                    </a>
+                </li>
+                <li class="nav-item ms-lg-3">
+                    <a class="nav-link login-btn" href="/login">
+                        <i class="bi bi-box-arrow-in-right"></i> Student Portal
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ============ HERO SECTION ============ -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 hero-content mb-5 mb-lg-0">
+                <div class="hero-badge">
+                    <i class="bi bi-star-fill" style="color: #F57C00;"></i>
+                    Top Rated Primary School 2024
+                </div>
+                <h1 class="hero-title">
+                    Empowering Young Minds for a <span>Brighter Tomorrow</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Building strong foundations through quality education, creativity,
+                    discipline, and innovation. We nurture every child's unique potential
+                    in a caring and stimulating environment.
+                </p>
+                <div class="d-flex flex-wrap">
+                    <a href="/login" class="btn-hero-primary">
+                        <i class="bi bi-person-check-fill"></i> Student Portal Login
+                    </a>
+                    <a href="/about" class="btn-hero-secondary">
+                        <i class="bi bi-info-circle-fill"></i> Learn More
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat-item">
+                        <div class="hero-stat-number">500+</div>
+                        <div class="hero-stat-label">Happy Students</div>
+                    </div>
+                    <div class="hero-stat-item">
+                        <div class="hero-stat-number">50+</div>
+                        <div class="hero-stat-label">Expert Teachers</div>
+                    </div>
+                    <div class="hero-stat-item">
+                        <div class="hero-stat-number">15+</div>
+                        <div class="hero-stat-label">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 hero-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop"
+                     alt="Happy Primary School Students"
+                     class="img-fluid hero-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FEATURES SECTION ============ -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">Why Choose Us</div>
+            <h2 class="section-title">What Makes Us Special</h2>
+            <p class="section-subtitle">
+                We provide a nurturing environment that fosters academic excellence and personal growth
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon icon-learning">
+                        <i class="bi bi-lightbulb-fill"></i>
+                    </div>
+                    <h3>Smart Learning</h3>
+                    <p>
+                        Interactive and engaging learning methods that make education
+                        fun and effective. We use modern teaching techniques and technology
+                        to enhance understanding.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon icon-teachers">
+                        <i class="bi bi-person-check-fill"></i>
+                    </div>
+                    <h3>Qualified Teachers</h3>
+                    <p>
+                        Experienced and dedicated educators committed to nurturing
+                        each child's unique potential. Our teachers undergo regular
+                        professional development.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon icon-safe">
+                        <i class="bi bi-shield-check-fill"></i>
+                    </div>
+                    <h3>Safe Environment</h3>
+                    <p>
+                        Secure and nurturing environment where children can learn,
+                        play, and grow confidently. 24/7 security and CCTV monitoring
+                        for peace of mind.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ ABOUT SECTION ============ -->
+<section class="about-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=500&h=400&fit=crop"
+                     alt="About Our School"
+                     class="img-fluid about-image">
+            </div>
+            <div class="col-lg-6 about-content">
+                <div class="section-badge">About Us</div>
+                <h2>Building Bright Futures Since 2008</h2>
+                <p class="text-muted mb-4">
+                    Bright Future Primary School has been at the forefront of primary
+                    education, providing quality learning experiences that prepare
+                    children for a successful future.
+                </p>
+                <ul class="about-features">
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Modern classrooms with smart boards and technology
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Well-equipped science and computer laboratories
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Comprehensive sports and recreational facilities
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Rich library with digital and physical resources
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Safe and reliable transportation services
+                    </li>
+                </ul>
+                <a href="/about" class="btn-hero-primary mt-3">
+                    <i class="bi bi-book"></i> Read More About Us
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ ACTIVITIES SECTION ============ -->
+<section class="activities-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">School Activities</div>
+            <h2 class="section-title">Beyond the Classroom</h2>
+            <p class="section-subtitle">
+                We offer a wide range of activities to develop well-rounded students
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="activity-card">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=300&h=200&fit=crop" alt="Sports">
+                    <div class="card-body">
+                        <h5><i class="bi bi-trophy" style="color: #F57C00;"></i> Sports</h5>
+                        <p class="text-muted small">Football, basketball, athletics, and swimming</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="activity-card">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=300&h=200&fit=crop" alt="Science">
+                    <div class="card-body">
+                        <h5><i class="bi bi-cpu" style="color: #F57C00;"></i> Science & Tech</h5>
+                        <p class="text-muted small">Robotics, coding, and science experiments</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="activity-card">
+                    <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=300&h=200&fit=crop" alt="Music">
+                    <div class="card-body">
+                        <h5><i class="bi bi-music-note-beamed" style="color: #F57C00;"></i> Music & Arts</h5>
+                        <p class="text-muted small">Choir, orchestra, painting, and drama</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="activity-card">
+                    <img src="https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=300&h=200&fit=crop" alt="Library">
+                    <div class="card-body">
+                        <h5><i class="bi bi-book" style="color: #F57C00;"></i> Reading Club</h5>
+                        <p class="text-muted small">Book clubs, storytelling, and literacy programs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ STATISTICS SECTION ============ -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number counter" data-target="500">0</div>
+                    <div class="stat-label">Students Enrolled</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number counter" data-target="50">0</div>
+                    <div class="stat-label">Qualified Teachers</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number counter" data-target="20">0</div>
+                    <div class="stat-label">Classrooms</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number counter" data-target="25">0</div>
+                    <div class="stat-label">Awards Won</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CTA SECTION ============ -->
+<section class="cta-section">
+    <div class="container">
+        <h2 class="fw-bold mb-3">Ready to Join Our School Family?</h2>
+        <p class="lead mb-4 opacity-90">Enroll your child today and give them the gift of quality education</p>
+        <a href="/admissions" class="btn-cta">
+            <i class="bi bi-pencil-square"></i> Apply for Admission
+        </a>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h5><i class="bi bi-sun-fill"></i> Bright Future Primary School</h5>
+                <p style="color: #bdbdbd;">
+                    Empowering young minds through quality education, creativity,
+                    and innovation. Building strong foundations for a brighter tomorrow.
+                </p>
+                <div class="social-icons">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5>Quick Links</h5>
+                <ul class="footer-links">
+                    <li><a href="/"><i class="bi bi-chevron-right"></i> Home</a></li>
+                    <li><a href="/about"><i class="bi bi-chevron-right"></i> About Us</a></li>
+                    <li><a href="/admissions"><i class="bi bi-chevron-right"></i> Admissions</a></li>
+                    <li><a href="/gallery"><i class="bi bi-chevron-right"></i> Gallery</a></li>
+                    <li><a href="/contact"><i class="bi bi-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5>Contact Info</h5>
+                <ul class="footer-links">
+                    <li>
+                        <i class="bi bi-geo-alt-fill" style="color: #F57C00;"></i>
+                        123 Education Street, Lagos, Nigeria
+                    </li>
+                    <li>
+                        <i class="bi bi-telephone-fill" style="color: #F57C00;"></i>
+                        +234 800 000 0000
+                    </li>
+                    <li>
+                        <i class="bi bi-envelope-fill" style="color: #F57C00;"></i>
+                        info@brightfuture.edu.ng
+                    </li>
+                    <li>
+                        <i class="bi bi-clock-fill" style="color: #F57C00;"></i>
+                        Mon-Fri: 8:00 AM - 4:00 PM
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 mb-4">
+                <h5>Newsletter</h5>
+                <p style="color: #bdbdbd;">Subscribe for updates and events</p>
+                <form>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your Email">
+                        <button class="btn" style="background: #F57C00; color: white;" type="submit">
+                            <i class="bi bi-send"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="mb-0">
+                &copy; 2024 Bright Future Primary School. All Rights Reserved.
+                | Designed with <i class="bi bi-heart-fill" style="color: #E65100;"></i> for Education
+            </p>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Counter animation
+    function animateCounters() {
+        const counters = document.querySelectorAll('.counter');
+        const speed = 100;
+
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+            const increment = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + increment);
+                setTimeout(animateCounters, 20);
+            } else {
+                counter.innerText = target;
+            }
+        });
+    }
+
+    // Trigger counter animation when stats section is visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+            }
+        });
+    });
+
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+</script>
+</body>
+</html>
